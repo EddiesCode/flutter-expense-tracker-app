@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_expense_tracker/components/expense_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../data/expense_data.dart';
@@ -72,22 +73,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<ExpenseData>(
-      builder: (context, value, child) => Scaffold(
-        backgroundColor: Colors.grey.shade300,
-        floatingActionButton: FloatingActionButton(
-          onPressed: addNewExpense,
-          child: const Icon(Icons.add),
-        ),
-        body: ListView.builder(
-            itemCount: value.getAllExpenseList().length,
-            itemBuilder: (context, index) => ListTile(
-                  title: Text(value.getAllExpenseList()[index].name),
-                  subtitle: Text(
-                      value.getAllExpenseList()[index].dateTime.toString()),
-                  trailing:
-                      Text("\$${value.getAllExpenseList()[index].amount}"),
-                )),
-      ),
-    );
+        builder: (context, value, child) => Scaffold(
+              backgroundColor: Colors.grey.shade300,
+              floatingActionButton: FloatingActionButton(
+                onPressed: addNewExpense,
+                child: const Icon(Icons.add),
+              ),
+              body: ListView.builder(
+                  itemCount: value.getAllExpenseList().length,
+                  itemBuilder: (context, index) => ExpenseTile(
+                      name: value.getAllExpenseList()[index].name,
+                      amount: value.getAllExpenseList()[index].amount,
+                      dateTime: value.getAllExpenseList()[index].dateTime)),
+            ));
   }
 }
