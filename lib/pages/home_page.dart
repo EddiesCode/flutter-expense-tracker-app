@@ -55,10 +55,18 @@ class _HomePageState extends State<HomePage> {
     Provider.of<ExpenseData>(context, listen: false).addNewExpense(newExpense);
 
     Navigator.pop(context);
+    clear();
   }
 
   void cancel() {
     Navigator.pop(context);
+    clear();
+  }
+
+  // clear controllers
+  void clear() {
+    newExpenseNameController.clear();
+    newExpenseAmountController.clear();
   }
 
   @override
