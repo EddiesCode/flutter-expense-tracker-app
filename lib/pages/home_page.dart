@@ -74,17 +74,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Consumer<ExpenseData>(
         builder: (context, value, child) => Scaffold(
-              backgroundColor: Colors.grey.shade300,
-              floatingActionButton: FloatingActionButton(
-                onPressed: addNewExpense,
-                child: const Icon(Icons.add),
-              ),
-              body: ListView.builder(
-                  itemCount: value.getAllExpenseList().length,
-                  itemBuilder: (context, index) => ExpenseTile(
-                      name: value.getAllExpenseList()[index].name,
-                      amount: value.getAllExpenseList()[index].amount,
-                      dateTime: value.getAllExpenseList()[index].dateTime)),
-            ));
+            backgroundColor: Colors.grey.shade300,
+            floatingActionButton: FloatingActionButton(
+              onPressed: addNewExpense,
+              child: const Icon(Icons.add),
+            ),
+            body: ListView(
+              children: [
+                // weekly summary
+
+                //expense list
+                ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: value.getAllExpenseList().length,
+                    itemBuilder: (context, index) => ExpenseTile(
+                        name: value.getAllExpenseList()[index].name,
+                        amount: value.getAllExpenseList()[index].amount,
+                        dateTime: value.getAllExpenseList()[index].dateTime)),
+              ],
+            )));
   }
 }
