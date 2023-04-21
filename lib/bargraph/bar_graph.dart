@@ -1,4 +1,4 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import "package:fl_chart/fl_chart.dart";
 import 'package:flutter_expense_tracker/bargraph/bar_data.dart';
 
@@ -38,15 +38,92 @@ class MyBarGraph extends StatelessWidget {
 
     myBarData.initializeBarData();
 
-    return BarChart(BarChartData(
+    return BarChart(
+      BarChartData(
         maxY: maxY,
         minY: 0,
+        gridData: FlGridData(show: false),
+        borderData: FlBorderData(show: false),
+        titlesData: FlTitlesData(
+            show: true,
+            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            bottomTitles: AxisTitles(
+                sideTitles: SideTitles(
+                    showTitles: true,
+                    getTitlesWidget: getBottomTitles,
+                    reservedSize: 60))),
         barGroups: myBarData.barData
             .map((data) => BarChartGroupData(x: data.x, barRods: [
                   BarChartRodData(
+                    color: Colors.grey[800],
+                    width: 25,
+                    borderRadius: BorderRadius.circular(4),
+                    backDrawRodData: BackgroundBarChartRodData(
+                      color: Colors.grey[200],
+                      toY: maxY,
+                      show: true,
+                    ),
                     toY: data.y,
                   )
                 ]))
-            .toList()));
+            .toList(),
+      ),
+    );
   }
+}
+
+Widget getBottomTitles(double value, TitleMeta meta) {
+  Text text;
+
+  switch (value.toInt()) {
+    case 0:
+      text = const Text(
+        "S",
+      );
+      break;
+    case 1:
+      text = const Text(
+        "M",
+      );
+      break;
+    case 2:
+      text = const Text(
+        "T",
+      );
+      break;
+    case 3:
+      text = const Text(
+        "W",
+      );
+      break;
+    case 4:
+      text = const Text(
+        "T",
+      );
+      break;
+    case 5:
+      text = const Text(
+        "F",
+      );
+      break;
+    case 6:
+      text = const Text(
+        "S",
+      );
+      break;
+    default:
+      text = const Text(
+        "",
+      );
+      break;
+  }
+
+  return text;
+
+  /* return SideTitleWidget(
+    axisSide: meta.axisSide,
+    child: text,
+  ); */
 }

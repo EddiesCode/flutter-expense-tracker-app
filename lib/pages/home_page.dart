@@ -78,12 +78,15 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.grey.shade300,
             floatingActionButton: FloatingActionButton(
               onPressed: addNewExpense,
+              backgroundColor: Colors.black,
               child: const Icon(Icons.add),
             ),
             body: ListView(
               children: [
+                const SizedBox(height: 20),
                 // weekly summary
                 ExpenseSummary(startOfWeek: value.startOfWeekDate()),
+                const SizedBox(height: 20),
 
                 //expense list
                 ListView.builder(
