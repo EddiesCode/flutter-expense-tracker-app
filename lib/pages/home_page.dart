@@ -8,6 +8,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // text controllers
+  final newExpenseNameController = TextEditingController();
+  final newExpenseAmountController = TextEditingController();
+
   // add new expense
   void addNewExpense() {
     showDialog(
@@ -15,17 +19,31 @@ class _HomePageState extends State<HomePage> {
       builder: (context) {
         return AlertDialog(
           title: const Text("Add new expense"),
-          content: Column(mainAxisSize: MainAxisSize.min, children: const [
+          content: Column(mainAxisSize: MainAxisSize.min, children: [
             // expense name
-            TextField(),
+            TextField(controller: newExpenseNameController),
 
             // expense amount
-            TextField()
+            TextField(controller: newExpenseAmountController)
           ]),
+          actions: [
+            MaterialButton(
+              onPressed: save,
+              child: const Text("Save"),
+            ),
+            MaterialButton(
+              onPressed: cancel,
+              child: const Text("Cancel"),
+            ),
+          ],
         );
       },
     );
   }
+
+  void save() {}
+
+  void cancel() {}
 
   @override
   Widget build(BuildContext context) {
