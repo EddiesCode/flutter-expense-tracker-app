@@ -30,7 +30,7 @@ class ExpenseSummary extends StatelessWidget {
 
     return Consumer<ExpenseData>(
       builder: (context, value, child) => SizedBox(
-        height: 200,
+        height: MediaQuery.of(context).size.height / 2,
         child: MyBarGraph(
           maxY: 100,
           sunAmount: value.calculateDailyExpenseSummary()[sunday] ?? 0,

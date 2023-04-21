@@ -19,6 +19,15 @@ class _HomePageState extends State<HomePage> {
   final newExpenseDollarController = TextEditingController();
   final newExpenseCentsController = TextEditingController();
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    // prepare data on startup
+    Provider.of<ExpenseData>(context, listen: false).prepareData();
+  }
+
   // add new expense
   void addNewExpense() {
     showDialog(
@@ -106,23 +115,28 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Colors.black,
               child: const Icon(Icons.add),
             ),
-            body: ListView(
-              children: [
-                const SizedBox(height: 20),
-                // weekly summary
-                ExpenseSummary(startOfWeek: value.startOfWeekDate()),
-                const SizedBox(height: 20),
+            body: SizedBox(
+              height: double.infinity,
+              child: Container(
+                color: Colors.grey,
+                child: ListView(
+                  children: [
+                    // weekly summary
+                    ExpenseSummary(startOfWeek: value.startOfWeekDate()),
 
-                //expense list
-                ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: value.getAllExpenseList().length,
-                    itemBuilder: (context, index) => ExpenseTile(
-                        name: value.getAllExpenseList()[index].name,
-                        amount: value.getAllExpenseList()[index].amount,
-                        dateTime: value.getAllExpenseList()[index].dateTime)),
-              ],
+                    //expense list
+                    ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: value.getAllExpenseList().length,
+                        itemBuilder: (context, index) => ExpenseTile(
+                            name: value.getAllExpenseList()[index].name,
+                            amount: value.getAllExpenseList()[index].amount,
+                            dateTime:
+                                value.getAllExpenseList()[index].dateTime)),
+                  ],
+                ),
+              ),
             )));
   }
 }

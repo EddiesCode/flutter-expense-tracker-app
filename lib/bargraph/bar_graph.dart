@@ -53,7 +53,7 @@ class MyBarGraph extends StatelessWidget {
                 sideTitles: SideTitles(
                     showTitles: true,
                     getTitlesWidget: getBottomTitles,
-                    reservedSize: 60))),
+                    reservedSize: 20))),
         barGroups: myBarData.barData
             .map((data) => BarChartGroupData(x: data.x, barRods: [
                   BarChartRodData(
@@ -75,42 +75,49 @@ class MyBarGraph extends StatelessWidget {
 }
 
 Widget getBottomTitles(double value, TitleMeta meta) {
-  Text text;
-
+  const style = TextStyle(fontWeight: FontWeight.bold);
+  Widget text;
   switch (value.toInt()) {
     case 0:
       text = const Text(
         "S",
+        style: style,
       );
       break;
     case 1:
       text = const Text(
         "M",
+        style: style,
       );
       break;
     case 2:
       text = const Text(
         "T",
+        style: style,
       );
       break;
     case 3:
       text = const Text(
         "W",
+        style: style,
       );
       break;
     case 4:
       text = const Text(
         "T",
+        style: style,
       );
       break;
     case 5:
       text = const Text(
         "F",
+        style: style,
       );
       break;
     case 6:
       text = const Text(
         "S",
+        style: style,
       );
       break;
     default:
@@ -120,7 +127,10 @@ Widget getBottomTitles(double value, TitleMeta meta) {
       break;
   }
 
-  return text;
+  return FittedBox(
+    fit: BoxFit.fitWidth,
+    child: text,
+  );
 
   /* return SideTitleWidget(
     axisSide: meta.axisSide,

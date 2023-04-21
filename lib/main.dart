@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_tracker/data/expense_data.dart';
+import 'package:flutter_expense_tracker/models/expense_item.dart';
 import 'package:flutter_expense_tracker/pages/home_page.dart';
 import "package:provider/provider.dart";
+import "package:hive_flutter/hive_flutter.dart";
 
-void main() {
+void main() async {
+  // Initialize hive
+
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(ExpenseItemAdapter());
+
+  // open a hive box
+  await Hive.openBox("expense_database");
+
   runApp(const MyApp());
 }
 
