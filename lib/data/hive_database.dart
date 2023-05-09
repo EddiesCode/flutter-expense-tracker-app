@@ -13,6 +13,8 @@ class HiveDataBase {
 
   // read data
   List<ExpenseItem> readData() {
+    // _myBox.deleteFromDisk();
+
     List<ExpenseItem> savedExpenses =
         (_myBox.get("ALL_EXPENSES") ?? []).cast<ExpenseItem>();
 

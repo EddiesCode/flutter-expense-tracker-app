@@ -28,13 +28,13 @@ class MyBarGraph extends StatelessWidget {
   Widget build(BuildContext context) {
     // initialize bardata
     BarData myBarData = BarData(
-        sunAmount: sunAmount,
         monAmount: monAmount,
         tueAmount: tueAmount,
         wedAmount: wedAmount,
         thurAmount: thurAmount,
         friAmount: friAmount,
-        satAmount: satAmount);
+        satAmount: satAmount,
+        sunAmount: sunAmount);
 
     myBarData.initializeBarData();
 
@@ -75,48 +75,50 @@ class MyBarGraph extends StatelessWidget {
 }
 
 Widget getBottomTitles(double value, TitleMeta meta) {
-  const style = TextStyle(fontWeight: FontWeight.bold);
+  const style = TextStyle(
+    fontWeight: FontWeight.bold,
+  );
   Widget text;
   switch (value.toInt()) {
     case 0:
       text = const Text(
-        "S",
+        "Mon",
         style: style,
       );
       break;
     case 1:
       text = const Text(
-        "M",
+        "Tue",
         style: style,
       );
       break;
     case 2:
       text = const Text(
-        "T",
+        "Wed",
         style: style,
       );
       break;
     case 3:
       text = const Text(
-        "W",
+        "Thu",
         style: style,
       );
       break;
     case 4:
       text = const Text(
-        "T",
+        "Fri",
         style: style,
       );
       break;
     case 5:
       text = const Text(
-        "F",
+        "Sat",
         style: style,
       );
       break;
     case 6:
       text = const Text(
-        "S",
+        "Sun",
         style: style,
       );
       break;

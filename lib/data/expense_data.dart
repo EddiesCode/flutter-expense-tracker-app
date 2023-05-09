@@ -60,7 +60,7 @@ class ExpenseData extends ChangeNotifier {
     }
   }
 
-  // get the date of the start of the week ( sunday )
+  // get the date of the start of the week ( monday )
   DateTime startOfWeekDate() {
     DateTime? startOfWeek;
 
@@ -69,7 +69,7 @@ class ExpenseData extends ChangeNotifier {
 
     // go backwards from today to find nearest sunday
     for (int i = 0; i < 7; i++) {
-      if (getDayName(today.subtract(Duration(days: i))) == "Sun") {
+      if (getDayName(today.subtract(Duration(days: i))) == "Mon") {
         startOfWeek = today.subtract(Duration(days: i));
       }
     }
