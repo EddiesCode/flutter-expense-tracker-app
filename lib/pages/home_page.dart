@@ -154,8 +154,54 @@ class _HomePageState extends State<HomePage> {
 
                   String expenseName = stringList[0];
 
-                  log(value);
-                  clear();
+                  late String amount;
+
+                  try {
+                    amount = stringList[1];
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 2),
+                        backgroundColor: Colors.red,
+                        content: const Text(
+                            "Invalid input (must follow format: expenseName amount)"),
+                        action: SnackBarAction(
+                          label: "Dismiss",
+                          onPressed: () {},
+                        ),
+                      ),
+                    );
+                    clear();
+                    return;
+                  }
+
+                  if (stringList.length < 2 ||
+                      !RegExp(r'^[0-9]+$').hasMatch(amount)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        duration: const Duration(seconds: 2),
+                        backgroundColor: Colors.red,
+                        content: const Text(
+                            "Invalid input (must follow format: expenseName amount)"),
+                        action: SnackBarAction(
+                          label: "Dismiss",
+                          onPressed: () {},
+                        ),
+                      ),
+                    );
+                  } else {
+                    ExpenseItem newExpense = ExpenseItem(
+                      name: expenseName,
+                      amount: amount,
+                      dateTime: DateTime.now(),
+                    );
+
+                    Provider.of<ExpenseData>(context, listen: false)
+                        .addNewExpense(newExpense);
+
+                    log(value);
+                    clear();
+                  }
                 },
                 textAlign: TextAlign.center,
                 decoration: const InputDecoration(
